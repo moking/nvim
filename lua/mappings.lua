@@ -72,14 +72,6 @@ end
 
 map("i", "<C-l>", "<cmd>lua EscapePair()<CR>", default_options)
 
-function git_lines_history()
-	local start_row, start_col = unpack(vim.api.nvim_buf_get_mark(0, '<'))
-	local end_row, end_col = unpack(vim.api.nvim_buf_get_mark(0, '>'))
-	vim.api.nvim_command(string.format("vertical Git log --oneline --no-patch -L%d,%d:%%", start_row, end_row))
-end
-
-map("v", "x", ":lua git_lines_history()<CR>", default_options)
-
 -- don't paste in select mode when press 'p'
 map("s", "p", "p", default_options)
 
