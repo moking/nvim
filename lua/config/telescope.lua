@@ -157,6 +157,7 @@ local function my_lsp_references()
 	opts.fname_width = width < 50 and 50 or width
 	opts.include_current_line = true
 	opts.attach_mappings = function(_, map)
+		map("i", "<c-g>", actions.to_fuzzy_refine)
 		map({"i", "n"}, "<CR>", function(prompt_bufnr)
 			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
 			actions.select_default(prompt_bufnr)
