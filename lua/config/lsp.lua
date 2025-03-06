@@ -1,9 +1,9 @@
 -- mason/mason-lspconfig/nvim-lspconfig
 
-local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
+local nproc = vim.fn.systemlist("nproc")[1]
 
 local ensure_installed_servers = {
-	"clangd@16.0.2", -- v17.0.3 indexing is too slow
+	"clangd",
 	"lua_ls",
 }
 
@@ -12,7 +12,7 @@ local server_opts = {
 		cmd = {
 			"clangd",
 			"--header-insertion=never",
-			"-j", nproc,
+			"-j=" .. nproc,
 			"--completion-style=detailed",
 			"--function-arg-placeholders",
 			"--rename-file-limit=0",
