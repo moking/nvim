@@ -151,18 +151,6 @@ return {
 		config = function() require("config.mini-indentscope") end,
 	},
 
---	{
---		"x48Jason/glance",
---		opts = {
---			gitee = {
---				token_file = "~/.token.gitee",
---				repo = "openeuler/kernel",
---			},
---			patchdiff = "diffonly",
---			q_quit_log = "off",
---		},
---	},
-
 	{
 		"x56Jason/glance.nvim",
 		opts = {
