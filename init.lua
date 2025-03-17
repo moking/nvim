@@ -60,6 +60,7 @@ map("n", "<C-x>3", "<esc>:vsplit<cr>", { desc = ""})
 map("n", "rb", "o<enter>Reviewed-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { desc = ""})
 map("n", "tb", "o<enter>Tested-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { desc = ""})
 map("n", "qq", "<esc>:q<cr>", { desc = "save buffer"})
+map("n", "ww", "<C-w><C-w>", { desc = "switch buffer"})
 
 map("n", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})
 map("i", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})

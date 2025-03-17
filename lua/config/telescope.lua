@@ -226,3 +226,7 @@ vim.keymap.set("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_optio
 vim.keymap.set("n", "<C-\\>s", my_grep_string, default_options)
 vim.keymap.set("n", "<C-\\>t", my_live_grep, default_options)
 vim.keymap.set("n", "<C-\\>r", my_lsp_references, default_options)
+
+vim.keymap.set("n", "<f1>s", my_grep_string, default_options)
+vim.keymap.set("n", "<f1>t", my_live_grep, default_options)
+vim.keymap.set("n", "<f1>r", my_lsp_references, default_options)
