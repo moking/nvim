@@ -184,5 +184,7 @@ return {
 		config = true,
 	},
 	{ "tpope/vim-sleuth" },
+	{"airblade/vim-gitgutter"},
+        {"rafi/awesome-vim-colorschemes"},
 }
 

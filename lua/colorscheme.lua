@@ -95,4 +95,4 @@ local default_options = {noremap = true, silent = true}
 
 vim.keymap.set("n", "fc", my_telescope_colorscheme, default_options)
 
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme desert")

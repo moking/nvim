@@ -14,7 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require('lazy').setup("plugins")
+--require('lazy').setup("plugins")
+require('lazy').setup(
+        "plugins",
+      {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+        require('lspsaga').setup({})
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons',     -- optional
+    }
+})
 
 -- Vim mappings, see lua/config/which.lua for more mappings
 require("mappings")
@@ -50,7 +62,11 @@ map("n", "tb", "o<enter>Tested-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { d
 map("n", "qq", "<esc>:q<cr>", { desc = "save buffer"})
 
 map("n", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})
+map("i", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})
 map("n", "<f3>", "<esc>:set list!<cr>", { desc = ""})
 map("n", "<f4>", "<esc>:set expandtab!<cr>", { desc = ""})
 map("n", "<f5>", "<esc>:GitGutterQuickFix | copen <return>", { desc = ""})
 -- map("n", "<f5>", "<esc>:GitGutterQuickFix \| copen <return>", { desc = ""})
+
+
+
