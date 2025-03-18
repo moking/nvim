@@ -99,6 +99,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     bufmap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>zz')
+    bufmap('n', 'fd', '<cmd>lua vim.lsp.buf.definition()<CR>zz')
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   end

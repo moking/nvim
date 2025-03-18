@@ -186,5 +186,7 @@ return {
 	{ "tpope/vim-sleuth" },
 	{"airblade/vim-gitgutter"},
         {"rafi/awesome-vim-colorschemes"},
+        {"vimwiki/vimwiki"},
+        {"gelguy/wilder.nvim"},
 }
 

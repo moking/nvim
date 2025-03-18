@@ -69,5 +69,9 @@ map("n", "<f4>", "<esc>:set expandtab!<cr>", { desc = ""})
 map("n", "<f5>", "<esc>:GitGutterQuickFix | copen <return>", { desc = ""})
 -- map("n", "<f5>", "<esc>:GitGutterQuickFix \| copen <return>", { desc = ""})
 
+vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'")
+vim.cmd("let g:vimwiki_list = [{'path': '~/vimwiki/src/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/html/'}]")
 
+vim.cmd("set listchars=tab:\\|-,space:.")
+vim.cmd("set listchars=tab:>·,trail:~,extends:>,precedes:<,space:␣")
 
