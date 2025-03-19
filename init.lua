@@ -54,7 +54,7 @@ end
 -- here some of my mappings:
 -- jump to the last changed spot
 --map("n", "<f12>", "<C-]>", { desc = "Jump to definition"})
---map("n", "<f11>", "<C-t>", { desc = "Jump back from definition"})
+map("n", "fb", "<C-t>", { desc = "Jump back from definition"})
 map("n", "<C-x>2", "<esc>:split<cr>", { desc = ""})
 map("n", "<C-x>3", "<esc>:vsplit<cr>", { desc = ""})
 map("n", "rb", "o<enter>Reviewed-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { desc = ""})
@@ -69,9 +69,11 @@ map("n", "<f4>", "<esc>:set expandtab!<cr>", { desc = ""})
 map("n", "<f5>", "<esc>:GitGutterQuickFix | copen <return>", { desc = ""})
 -- map("n", "<f5>", "<esc>:GitGutterQuickFix \| copen <return>", { desc = ""})
 
-vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'")
 vim.cmd("let g:vimwiki_list = [{'path': '~/vimwiki/src/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/html/'}]")
+vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'")
 
 vim.cmd("set listchars=tab:\\|-,space:.")
 vim.cmd("set listchars=tab:>·,trail:~,extends:>,precedes:<,space:␣")
+vim.cmd("set cc=80")
 
+require('gitsigns').setup()
