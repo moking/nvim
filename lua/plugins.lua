@@ -188,5 +188,38 @@ return {
         {"rafi/awesome-vim-colorschemes"},
         {"vimwiki/vimwiki"},
         {"gelguy/wilder.nvim"},
+	{"lewis6991/gitsigns.nvim"},
+	{"jesseduffield/lazygit"},
+	{"hrsh7th/cmp-path"},
+	-- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			-- add any options here
+		}
+	},
+	{ 'echasnovski/mini.align', version = '*' },
+	{"simrat39/symbols-outline.nvim"},
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",         -- required
+			"sindrets/diffview.nvim",        -- optional - Diff integration
+
+			-- Only one of these is needed.
+			"nvim-telescope/telescope.nvim", -- optional
+			--"ibhagwan/fzf-lua",              -- optional
+			--"echasnovski/mini.pick",         -- optional
+		},
+	},
+	{
+		"gelguy/wilder.nvim",
+	},
+	{"ervandew/supertab"},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" }
+	},
 }
 
