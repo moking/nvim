@@ -188,5 +188,6 @@ return {
         {"rafi/awesome-vim-colorschemes"},
         {"vimwiki/vimwiki"},
         {"gelguy/wilder.nvim"},
+	{"lewis6991/gitsigns.nvim"},
 }
 

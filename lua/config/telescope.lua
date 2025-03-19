@@ -219,7 +219,7 @@ end
 local default_options = {noremap = true, silent = true}
 
 vim.keymap.set("n", "fg", my_lsp_dynamic_workspace_symbols, default_options)
-vim.keymap.set("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
+--vim.keymap.set("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
 vim.keymap.set("n", "ff", "<cmd>Telescope find_files<CR>", default_options)
 vim.keymap.set("n", "fw", "<cmd>Telescope workspaces<CR>", default_options)
 vim.keymap.set("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_options)
