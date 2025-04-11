@@ -541,3 +541,17 @@ end
 
 vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
     { desc = "Open harpoon window" })
+
+require('lspconfig').harper_ls.setup{}
+-- require('lspconfig').python_lsp_server.setup{}
+local cmp_nvim_lsp = require "cmp_nvim_lsp"
+
+require("lspconfig").clangd.setup {
+  on_attach = on_attach,
+  capabilities = cmp_nvim_lsp.default_capabilities(),
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+}
+
