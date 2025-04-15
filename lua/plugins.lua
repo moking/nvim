@@ -186,7 +186,18 @@ return {
 	{ "tpope/vim-sleuth" },
 	{"airblade/vim-gitgutter"},
         {"rafi/awesome-vim-colorschemes"},
-        {"vimwiki/vimwiki"},
+	{"vimwiki/vimwiki", 
+		init = function() 
+			vim.g.vimwiki_list = {
+				{
+					path = '~/vimwiki/src/',
+					syntax = 'markdown',
+                                        ext = '.md',
+					path_html = '~/vimwiki/html/',
+				},
+			}
+		end,
+	},
         {"gelguy/wilder.nvim"},
 	{"lewis6991/gitsigns.nvim"},
 	{"jesseduffield/lazygit"},
@@ -220,6 +231,15 @@ return {
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" }
+	},
+	{"mvllow/modes.nvim"},
+	{
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- or if using mini.icons/mini.nvim
+		-- dependencies = { "echasnovski/mini.icons" },
+		opts = {}
 	},
 }
 

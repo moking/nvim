@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'
 
 --require('lazy').setup("plugins")
 require('lazy').setup(
@@ -67,7 +68,7 @@ map("i", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})
 map("n", "<f3>", "<esc>:set list!<cr>", { desc = ""})
 map("n", "<f4>", "<esc>:set expandtab!<cr>", { desc = ""})
 map("n", "<f5>", "<esc>:GitGutterQuickFix | copen <return>", { desc = ""})
--- map("n", "<f5>", "<esc>:GitGutterQuickFix \| copen <return>", { desc = ""})
+map("n", "<f1>", "<esc>:Telescope oldfiles<cr>", { desc = ""})
 
 vim.cmd("let g:vimwiki_list = [{'path': '~/vimwiki/src/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/html/'}]")
 vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'")
@@ -75,6 +76,8 @@ vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki
 vim.cmd("set listchars=tab:\\|-,space:.")
 vim.cmd("set listchars=tab:>·,trail:~,extends:>,precedes:<,space:␣")
 vim.cmd("set cc=80")
+vim.cmd("set textwidth=80")
+-- vim.cmd("set fo+=a")
 
 require('gitsigns').setup()
 require('Comment').setup()
@@ -554,4 +557,39 @@ require("lspconfig").clangd.setup {
     "--offset-encoding=utf-16",
   },
 }
+
+require('modes').setup({
+	colors = {
+		bg = "", -- Optional bg param, defaults to Normal hl group
+		copy = "#f5c359",
+		delete = "#c75c6a",
+		insert = "#78ccc5",
+		visual = "#9745be",
+	},
+
+	-- Set opacity for cursorline and number background
+	line_opacity = 0.15,
+
+	-- Enable cursor highlights
+	set_cursor = true,
+
+	-- Enable cursorline initially, and disable cursorline for inactive windows
+	-- or ignored filetypes
+	set_cursorline = true,
+
+	-- Enable line number highlights to match cursorline
+	set_number = true,
+
+	-- Enable sign column highlights to match cursorline
+	set_signcolumn = true,
+
+	-- Disable modes highlights in specified filetypes
+	-- Please PR commonly ignored filetypes
+	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
+})
+
+require("fzf-lua").setup({
+  "hide",
+  -- your other settings here 
+})
 
