@@ -78,6 +78,7 @@ vim.cmd("set listchars=tab:>·,trail:~,extends:>,precedes:<,space:␣")
 vim.cmd("set cc=80")
 vim.cmd("set textwidth=80")
 -- vim.cmd("set fo+=a")
+vim.cmd("set cino+=(0")
 
 require('gitsigns').setup()
 require('Comment').setup()

@@ -200,7 +200,6 @@ return {
 	},
         {"gelguy/wilder.nvim"},
 	{"lewis6991/gitsigns.nvim"},
-	{"jesseduffield/lazygit"},
 	{"hrsh7th/cmp-path"},
 	-- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
 	{
@@ -241,5 +240,6 @@ return {
 		-- dependencies = { "echasnovski/mini.icons" },
 		opts = {}
 	},
+	{"voldikss/vim-floaterm"},
 }
 
