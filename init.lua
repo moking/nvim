@@ -148,7 +148,6 @@ local opts = {
 require("symbols-outline").setup(opts)
 
 local neogit = require("neogit")
-
 neogit.setup {
   -- Hides the hints at the top of the status buffer
   disable_hint = false,
@@ -669,3 +668,4 @@ vim.keymap.set('n', '<leader>gl', function()
   vim.api.nvim_command('FloatermNew --autoclose=0 git show ' .. sha)
 end, { desc = 'Git show for current line blame commit (Floaterm)' })
 
+vim.keymap.set('n', '<M-x>', '<esc>:FloatermNew --autoclose=0 --width=0.8 --height=0.7 ', { noremap = true, silent = false })
