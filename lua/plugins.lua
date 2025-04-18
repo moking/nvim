@@ -222,9 +222,6 @@ return {
 			--"echasnovski/mini.pick",         -- optional
 		},
 	},
-	{
-		"gelguy/wilder.nvim",
-	},
 	{"ervandew/supertab"},
 	{
 		"ThePrimeagen/harpoon",
