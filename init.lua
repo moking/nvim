@@ -669,3 +669,5 @@ vim.keymap.set('n', '<leader>gl', function()
 end, { desc = 'Git show for current line blame commit (Floaterm)' })
 
 vim.keymap.set('n', '<M-x>', '<esc>:FloatermNew --autoclose=0 --width=0.8 --height=0.7 ', { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>y", "yiw", { noremap = true })
+vim.keymap.set("n", "<leader>wb", "<esc>:FloatermNew --autoclose=0 --width=0.95 --height=0.9 w3m -B<cr>", { noremap = true })
