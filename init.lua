@@ -671,3 +671,25 @@ end, { desc = 'Git show for current line blame commit (Floaterm)' })
 vim.keymap.set('n', '<M-x>', '<esc>:FloatermNew --autoclose=0 --width=0.8 --height=0.7 ', { noremap = true, silent = false })
 vim.keymap.set("n", "<leader>y", "yiw", { noremap = true })
 vim.keymap.set("n", "<leader>wb", "<esc>:FloatermNew --autoclose=0 --width=0.95 --height=0.9 w3m -B<cr>", { noremap = true })
+
+
+vim.keymap.set("n", "<leader>cf", "<esc>:lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>ct", "<esc>:lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true })
+
+require('litee.lib').setup({
+    tree = {
+        icon_set = "codicons"
+    },
+    panel = {
+        orientation = "left",
+        panel_size  = 30
+    }
+})
+require('litee.calltree').setup({})
+
+-- vim.lsp.handlers['callHierarchy/incomingCalls'] = vim.lsp.with(
+--             require('litee.lsp.handlers').ch_lsp_handler("from"), {}
+-- )
+-- vim.lsp.handlers['callHierarchy/outgoingCalls'] = vim.lsp.with(
+--             require('litee.lsp.handlers').ch_lsp_handler("to"), {}
+-- )
