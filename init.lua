@@ -686,10 +686,5 @@ require('litee.lib').setup({
     }
 })
 require('litee.calltree').setup({})
-
--- vim.lsp.handlers['callHierarchy/incomingCalls'] = vim.lsp.with(
---             require('litee.lsp.handlers').ch_lsp_handler("from"), {}
--- )
--- vim.lsp.handlers['callHierarchy/outgoingCalls'] = vim.lsp.with(
---             require('litee.lsp.handlers').ch_lsp_handler("to"), {}
--- )
+require('dict').setup()
+vim.keymap.set('n', '<Leader>d', '<Cmd>lua require("dict").lookup()<CR>')

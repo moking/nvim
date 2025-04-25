@@ -260,5 +260,6 @@ return {
 		},
 		config = function(_, opts) require('litee.calltree').setup(opts) end
 	},
+	{'jalvesaq/dict.nvim'},
 }
 
