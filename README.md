@@ -49,18 +49,21 @@ Qemu automatically generate a compile_commands.json in its build/ directory, so 
 
 ## 4. Key Bindings
 
+See [USAGE.md](USAGE.md) for the full hotkey cheat sheet and typical workflows.
+
 | Mode | Key              | Binding                                                         |
 | ---- | ---------------- | ----------------------------------------------------------------|
-| n    | \<SPACE\>        | Leader key                                                      |
+| n    | \<SPACE\>        | Leader key                                                      |
 | n    | tt               | Toggle Nvim-Tree on left side                                   |
-| n    | ts               | Toggle Symbols Outline on right side                            |
+| n    | ts               | Toggle Symbols Outline                                          |
 | n    | fc               | Telescope switch colorscheme                                    |
 | n    | ff               | Telescope find file                                             |
-| n    | fb               | Telescope find and switch buffer                                |
+| n    | fd               | LSP go to definition                                            |
+| n    | fb               | Jump back from definition (same as \<C-t\>)                     |
 | n    | fw               | Telescope find and switch workspace                             |
-| n    | fh               | Telescope find all commits that touch selected lines            |
+| v    | fh               | Telescope find all commits that touch selected lines            |
 | n    | fg               | Telescope lsp dynamic workspace symbols                         |
-| n    | \<C-\]\>         | LSP go to definition                                            | 
+| n    | \<C-\]\>         | LSP go to definition                                            |
 | n    | \<C-\\\>r        | Telescope lsp find symbol references                            |
 | n    | \<C-\\\>s        | Telescope grep word under cursor                                |
 | n    | \<C-\\\>t        | Telescope live grep                                             |
@@ -70,10 +73,9 @@ Qemu automatically generate a compile_commands.json in its build/ directory, so 
 | n    | K                | LSP hover on current word                                       |
 | n    | \<ESC\>          | Cancel search highlight                                         |
 | n    | \<TAB\>          | Goto next harpoon buffer, if no, go to next buffer              |
-| n    | \<C-Left\>       | Window vertical resize +1                                       |
-| n    | \<C-Right\>      | Window vertical resize -1                                       |
-| n    | \<C-Up\>         | Window resize -1                                                |
-| n    | \<C-Down\>       | Window resize +1                                                |
+| n    | m / MM           | Add file to harpoon / toggle harpoon menu                       |
+| n    | \<C-Left\>       | Previous tab                                                    |
+| n    | \<C-Right\>      | Next tab                                                        |
 | n    | \<SPACE\>w       | Switch window                                                   |
-| n    | \<C-n\>          | Start a terminal                                                |
-| t    | \<ESC\>          | Back to normal mode in terminal                                 |
+| n    | \<C-n\>          | Toggle a floating terminal                                      |
+| t    | \<C-\\\>\<C-n\>  | Back to normal mode in terminal                                 |

@@ -35,7 +35,25 @@ local function toggle_prev_buffer()
 	end
 end
 
+local function telescope_harpoon_files()
+	local conf = require("telescope.config").values
+	local file_paths = {}
+	for _, item in ipairs(harpoon:list().items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers").new({}, {
+		prompt_title = "Harpoon",
+		finder = require("telescope.finders").new_table({
+			results = file_paths,
+		}),
+		previewer = conf.file_previewer({}),
+		sorter = conf.generic_sorter({}),
+	}):find()
+end
+
 vim.keymap.set("n", "m", function() my_harpoon_add_file() end)
+vim.keymap.set("n", "<leader>fh", telescope_harpoon_files, { desc = "Harpoon files (Telescope)" })
 vim.keymap.set("n", "MM", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end)
 vim.keymap.set("n", "M1", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "M2", function() harpoon:list():select(2) end)

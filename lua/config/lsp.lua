@@ -11,6 +11,7 @@ local server_opts = {
 	["clangd"] = {
 		cmd = {
 			"clangd",
+			"--offset-encoding=utf-16",
 			"--header-insertion=never",
 			"-j=" .. nproc,
 			"--completion-style=detailed",

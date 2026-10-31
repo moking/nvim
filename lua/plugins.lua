@@ -93,7 +93,7 @@ return {
 			{ "ts", "<cmd>Outline<CR>", desc = "Toggle Symbol Outline" },
 		},
 		opts = {
-			symbols = { icon_source = lspkind, },
+			symbols = { icon_source = "lspkind", },
 		}
 	},
 
@@ -176,6 +176,7 @@ return {
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function() require("config.harpoon") end,
 	},
 
@@ -188,6 +189,7 @@ return {
         {"rafi/awesome-vim-colorschemes"},
 	{"vimwiki/vimwiki", 
 		init = function() 
+			vim.g.vimwiki_map_prefix = '<Leader>v'
 			vim.g.vimwiki_list = {
 				{
 					path = '~/vimwiki/src/',
@@ -209,7 +211,6 @@ return {
 		}
 	},
 	{ 'echasnovski/mini.align', version = '*' },
-	{"simrat39/symbols-outline.nvim"},
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -223,11 +224,6 @@ return {
 		},
 	},
 	{"ervandew/supertab"},
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" }
-	},
 	{"mvllow/modes.nvim"},
 	{
 		"ibhagwan/fzf-lua",
@@ -261,5 +257,25 @@ return {
 		config = function(_, opts) require('litee.calltree').setup(opts) end
 	},
 	{'jalvesaq/dict.nvim'},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "vimwiki" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		init = function()
+			vim.treesitter.language.register("markdown", "vimwiki")
+		end,
+		opts = {
+			file_types = { "markdown", "vimwiki" },
+		},
+	},
+	{
+		'nvimdev/lspsaga.nvim',
+		event = "LspAttach",
+		config = function() require('lspsaga').setup({}) end,
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-tree/nvim-web-devicons',
+		},
+	},
 }
 

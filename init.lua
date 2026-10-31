@@ -15,19 +15,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'
 
---require('lazy').setup("plugins")
-require('lazy').setup(
-        "plugins",
-      {
-    'nvimdev/lspsaga.nvim',
-    config = function()
-        require('lspsaga').setup({})
-    end,
-    dependencies = {
-        'nvim-treesitter/nvim-treesitter', -- optional
-        'nvim-tree/nvim-web-devicons',     -- optional
-    }
-})
+require('lazy').setup("plugins")
 
 -- Vim mappings, see lua/config/which.lua for more mappings
 require("mappings")
@@ -60,7 +48,7 @@ map("n", "<C-x>2", "<esc>:split<cr>", { desc = ""})
 map("n", "<C-x>3", "<esc>:vsplit<cr>", { desc = ""})
 map("n", "rb", "o<enter>Reviewed-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { desc = ""})
 map("n", "tb", "o<enter>Tested-by: Fan Ni <fan.ni@samsung.com><enter><esc>", { desc = ""})
-map("n", "qq", "<esc>:q<cr>", { desc = "save buffer"})
+map("n", "qq", "<esc>:q<cr>", { desc = "quit window"})
 map("n", "ww", "<C-w><C-w>", { desc = "switch buffer"})
 
 map("n", "<f2>", "<esc>:w<cr>", { desc = "save buffer"})
@@ -69,6 +57,8 @@ map("n", "<f3>", "<esc>:set list!<cr>", { desc = ""})
 map("n", "<f4>", "<esc>:set expandtab!<cr>", { desc = ""})
 map("n", "<f5>", "<esc>:GitGutterQuickFix | copen <return>", { desc = ""})
 map("n", "<f1>", "<esc>:Telescope oldfiles<cr>", { desc = ""})
+
+map("n", "--", "^i\t- <esc>$", { desc = "generate itemize"})
 
 vim.cmd("let g:vimwiki_list = [{'path': '~/vimwiki/src/', 'syntax': 'markdown', 'ext': '.md', 'path_html': '~/vimwiki/html/'}]")
 vim.cmd("let g:vimwiki_custom_wiki2html='~/.vim/bundles/vimwiki/autoload/vimwiki/customwiki2html.sh'")
@@ -82,71 +72,6 @@ vim.cmd("set cino+=(0")
 
 require('Comment').setup()
 require('mini.align').setup()
-local opts = {
-  highlight_hovered_item = true,
-  show_guides = true,
-  auto_preview = false,
-  position = 'left',
-  relative_width = true,
-  width = 25,
-  auto_close = false,
-  show_numbers = false,
-  show_relative_numbers = false,
-  show_symbol_details = true,
-  preview_bg_highlight = 'Pmenu',
-  autofold_depth = nil,
-  auto_unfold_hover = true,
-  fold_markers = { '', '' },
-  wrap = false,
-  keymaps = { -- These keymaps can be a string or a table for multiple keys
-    close = {"<Esc>", "q"},
-    goto_location = "<Cr>",
-    focus_location = "o",
-    hover_symbol = "<C-space>",
-    toggle_preview = "K",
-    rename_symbol = "r",
-    code_actions = "a",
-    fold = "h",
-    unfold = "l",
-    fold_all = "W",
-    unfold_all = "E",
-    fold_reset = "R",
-  },
-  lsp_blacklist = {},
-  symbol_blacklist = {},
-  symbols = {
-    File = { icon = "", hl = "@text.uri" },
-    Module = { icon = "", hl = "@namespace" },
-    Namespace = { icon = "", hl = "@namespace" },
-    Package = { icon = "", hl = "@namespace" },
-    Class = { icon = "𝓒", hl = "@type" },
-    Method = { icon = "ƒ", hl = "@method" },
-    Property = { icon = "", hl = "@method" },
-    Field = { icon = "", hl = "@field" },
-    Constructor = { icon = "", hl = "@constructor" },
-    Enum = { icon = "ℰ", hl = "@type" },
-    Interface = { icon = "ﰮ", hl = "@type" },
-    Function = { icon = "", hl = "@function" },
-    Variable = { icon = "", hl = "@constant" },
-    Constant = { icon = "", hl = "@constant" },
-    String = { icon = "𝓐", hl = "@string" },
-    Number = { icon = "#", hl = "@number" },
-    Boolean = { icon = "⊨", hl = "@boolean" },
-    Array = { icon = "", hl = "@constant" },
-    Object = { icon = "⦿", hl = "@type" },
-    Key = { icon = "🔐", hl = "@type" },
-    Null = { icon = "NULL", hl = "@type" },
-    EnumMember = { icon = "", hl = "@field" },
-    Struct = { icon = "𝓢", hl = "@type" },
-    Event = { icon = "🗲", hl = "@type" },
-    Operator = { icon = "+", hl = "@operator" },
-    TypeParameter = { icon = "𝙏", hl = "@parameter" },
-    Component = { icon = "", hl = "@function" },
-    Fragment = { icon = "", hl = "@constant" },
-  },
-}
-require("symbols-outline").setup(opts)
-
 local neogit = require("neogit")
 neogit.setup {
   -- Hides the hints at the top of the status buffer
@@ -499,63 +424,21 @@ wilder.setup({modes = {':', '/', '?'}})
 wilder.set_option('pipeline', {
   wilder.branch(
     wilder.cmdline_pipeline({
-      -- sets the language to use, 'vim' and 'python' are supported
-      language = 'python',
+      -- 'python' needs the pynvim provider, which is not installed
+      language = 'vim',
       -- 0 turns off fuzzy matching
       -- 1 turns on fuzzy matching
       -- 2 partial fuzzy matching (match does not have to begin with the same first letter)
       fuzzy = 1,
     }),
-    wilder.python_search_pipeline({
-      -- can be set to wilder#python_fuzzy_delimiter_pattern() for stricter fuzzy matching
-      pattern = wilder.python_fuzzy_pattern(),
-      -- omit to get results in the order they appear in the buffer
-      sorter = wilder.python_difflib_sorter(),
-      -- can be set to 're2' for performance, requires pyre2 to be installed
-      -- see :h wilder#python_search() for more details
-      engine = 're',
-    })
+    wilder.vim_search_pipeline()
   ),
 })
 
 vim.g.SuperTabContextDefaultCompletionType = "<c-n>"
 
-local harpoon = require('harpoon')
-harpoon:setup({})
-
--- basic telescope configuration
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-    end
-
-    require("telescope.pickers").new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table({
-            results = file_paths,
-        }),
-        previewer = conf.file_previewer({}),
-        sorter = conf.generic_sorter({}),
-    }):find()
-end
-
-vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
-
 require('lspconfig').harper_ls.setup{}
 -- require('lspconfig').python_lsp_server.setup{}
-local cmp_nvim_lsp = require "cmp_nvim_lsp"
-
-require("lspconfig").clangd.setup {
-  on_attach = on_attach,
-  capabilities = cmp_nvim_lsp.default_capabilities(),
-  cmd = {
-    "clangd",
-    "--offset-encoding=utf-16",
-  },
-}
 
 require('modes').setup({
 	colors = {
@@ -670,7 +553,7 @@ end, { desc = 'Git show for current line blame commit (Floaterm)' })
 
 vim.keymap.set('n', '<M-x>', '<esc>:FloatermNew --autoclose=0 --width=0.8 --height=0.7 ', { noremap = true, silent = false })
 vim.keymap.set("n", "<leader>y", "yiw", { noremap = true })
-vim.keymap.set("n", "<leader>wb", "<esc>:FloatermNew --autoclose=0 --width=0.95 --height=0.9 w3m -B<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>xb", "<esc>:FloatermNew --autoclose=0 --width=0.95 --height=0.9 w3m -B<cr>", { noremap = true })
 
 
 vim.keymap.set("n", "<leader>cf", "<esc>:lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true })
