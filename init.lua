@@ -559,6 +559,82 @@ vim.keymap.set("n", "<leader>xb", "<esc>:FloatermNew --autoclose=0 --width=0.95 
 vim.keymap.set("n", "<leader>cf", "<esc>:lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true })
 vim.keymap.set("n", "<leader>ct", "<esc>:lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true })
 
+local cursor_sessions = {}
+local cursor_last = 1
+
+local function cursor_session(n)
+  if not cursor_sessions[n] then
+    cursor_sessions[n] = require("toggleterm.terminal").Terminal:new({
+      -- offset so <count><C-n> toggleterm ids never pick up an agent session
+      id = 100 + n,
+      cmd = "agent",
+      display_name = "Cursor " .. n,
+      direction = "float",
+      hidden = true,
+      float_opts = {
+        width = function() return math.floor(vim.o.columns * 0.9) end,
+        height = function() return math.floor(vim.o.lines * 0.9) end,
+      },
+      on_exit = function() cursor_sessions[n] = nil end,
+    })
+  end
+  return cursor_sessions[n]
+end
+
+local function cursor_open_session()
+  for i, term in pairs(cursor_sessions) do
+    if term:is_open() then return i end
+  end
+end
+
+local function cursor_show(n)
+  local open = cursor_open_session()
+  if open and open ~= n then cursor_sessions[open]:close() end
+  cursor_last = n
+  if open ~= n then cursor_session(n):open() end
+end
+
+-- <count> picks a session; no count hides the open one or reopens the last used
+local function toggle_cursor_agent()
+  local n = vim.v.count
+  local open = cursor_open_session()
+  if open and (n == 0 or n == open) then
+    cursor_sessions[open]:close()
+    return
+  end
+  cursor_show(n == 0 and cursor_last or n)
+end
+
+local function pick_cursor_agent()
+  local open = cursor_open_session()
+  if open then cursor_sessions[open]:close() end
+
+  local items = vim.tbl_keys(cursor_sessions)
+  table.sort(items)
+  local new = 1
+  while cursor_sessions[new] do new = new + 1 end
+  table.insert(items, "new")
+
+  vim.ui.select(items, {
+    prompt = "Cursor sessions",
+    format_item = function(n)
+      if n == "new" then return "+ New session (Cursor " .. new .. ")" end
+      return "Cursor " .. n .. (n == cursor_last and "  (last)" or "")
+    end,
+  }, function(choice)
+    if choice then cursor_show(choice == "new" and new or choice) end
+  end)
+end
+
+vim.keymap.set("n", "<leader>ca", toggle_cursor_agent, { desc = "Toggle Cursor agent ([count] = session)" })
+vim.keymap.set({ "n", "t" }, "<M-a>", toggle_cursor_agent, { desc = "Toggle Cursor agent ([count] = session)" })
+vim.keymap.set("n", "<leader>cs", pick_cursor_agent, { desc = "Pick Cursor agent session" })
+vim.keymap.set({ "n", "t" }, "<M-s>", pick_cursor_agent, { desc = "Pick Cursor agent session" })
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "TermLeave" }, {
+  command = "silent! checktime",
+})
+
 require('litee.lib').setup({
     tree = {
         icon_set = "codicons"
