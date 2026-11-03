@@ -4,6 +4,9 @@ require"nvim-treesitter.configs".setup {
     ensure_installed = {
         "c", "cpp", "lua", "vim", "vimdoc", "dockerfile", "bash",
         "markdown", "markdown_inline",
+        -- code blocks in Markdown notes
+        "sql", "javascript", "css", "json", "yaml", "python", "html",
+        "turtle", "sparql",
 --	"cmake", "html",
 --	"javascript", "json", "lua",
 --	"yaml", "markdown"
